@@ -1,10 +1,9 @@
 package com.softuni.mobilele.repositories;
 
-import com.softuni.mobilele.domain.enums.Role;
+import com.softuni.mobilele.domain.entities.Brand;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RoleRepository extends JpaRepository<Role, String> {
-
+public interface BrandRepository extends JpaRepository<Brand, String> {
 }
