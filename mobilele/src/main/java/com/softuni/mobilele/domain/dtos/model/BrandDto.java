@@ -1,28 +1,18 @@
-package com.softuni.mobilele.domain.entities;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-
+package com.softuni.mobilele.domain.dtos.model;
 import java.util.Date;
 
-@Entity
-@Table(name = "brands")
-public class Brand extends BaseEntity {
-    @Column(unique = true, nullable = false)
+public class BrandDto extends BaseEntityDto {
     private String name;
 
-    @Column
     private Date created;
 
-    @Column
     private Date modified;
 
     public String getName() {
         return name;
     }
 
-    public Brand setName(String name) {
+    public BrandDto setName(String name) {
         this.name = name;
         return this;
     }
@@ -31,7 +21,7 @@ public class Brand extends BaseEntity {
         return created;
     }
 
-    public Brand setCreated(Date created) {
+    public BrandDto setCreated(Date created) {
         this.created = created;
         return this;
     }
@@ -40,7 +30,7 @@ public class Brand extends BaseEntity {
         return modified;
     }
 
-    public Brand setModified(Date modified) {
+    public BrandDto setModified(Date modified) {
         this.modified = modified;
         return this;
     }
