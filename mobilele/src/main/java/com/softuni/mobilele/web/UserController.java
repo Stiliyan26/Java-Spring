@@ -6,6 +6,7 @@ import com.softuni.mobilele.services.role.UserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,13 +26,16 @@ public class UserController extends BaseController {
     @GetMapping("/register")
     public ModelAndView getRegister(ModelAndView modelAndView){
         List<UserRoleViewModelDto> roleServiceAll = this.roleService.getAll();
+
         modelAndView.addObject("roles", roleServiceAll);
+        modelAndView.addObject("userRegister", new UserRegisterFormDto());
 
         return super.view("auth-register", modelAndView);
     }
 
     @PostMapping("/register")
-    public ModelAndView postRegister(UserRegisterFormDto userRegister) {
+    public ModelAndView postRegister(
+            @ModelAttribute UserRegisterFormDto userRegisterInfo) {
         return super.redirect("auth-login");
     }
 }

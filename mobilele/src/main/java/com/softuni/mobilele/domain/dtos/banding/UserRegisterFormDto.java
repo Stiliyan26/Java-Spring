@@ -1,7 +1,5 @@
 package com.softuni.mobilele.domain.dtos.banding;
 
-import jakarta.persistence.Column;
-
 public class UserRegisterFormDto {
     private String username;
 
