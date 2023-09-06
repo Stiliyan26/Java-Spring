@@ -33,13 +33,32 @@ public class Route extends BaseEntity {
 
     @OneToMany(targetEntity = Picture.class,
             mappedBy = "route",
+            fetch = FetchType.EAGER,
             cascade = {CascadeType.MERGE, CascadeType.DETACH})
-        private Set<Picture> pictures;
+    private Set<Picture> pictures;
 
     @ManyToMany
     private Set<Category> categories;
 
     public Route() {
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public Route setComments(Set<Comment> comments) {
+        this.comments = comments;
+        return this;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public Route setCategories(Set<Category> categories) {
+        this.categories = categories;
+        return this;
     }
 
     public String getGpxCoordinates() {
@@ -84,6 +103,24 @@ public class Route extends BaseEntity {
 
     public Route setVideo(String video) {
         this.video = video;
+        return this;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Route setDescription(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public Set<Picture> getPictures() {
+        return pictures;
+    }
+
+    public Route setPictures(Set<Picture> pictures) {
+        this.pictures = pictures;
         return this;
     }
 }
