@@ -47,14 +47,14 @@ public class MostCommentedRouteViewDto {
     }
 
     public static MostCommentedRouteViewDto fromRoute(Route route) {
-        Set<Picture> pictures = route.getPictures();
+        String picture = route.getPictures()
+                .stream()
+                .findFirst()
+                .orElseThrow(NoSuchElementException::new)
+                .getUrl();
 
         return new MostCommentedRouteViewDto(route.getName(),
                 route.getDescription(),
-                route.getPictures()
-                        .stream()
-                        .findFirst()
-                        .orElseThrow(NoSuchElementException::new)
-                        .getUrl());
+                picture);
     }
 }
