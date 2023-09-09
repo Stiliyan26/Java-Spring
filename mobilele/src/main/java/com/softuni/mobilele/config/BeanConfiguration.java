@@ -18,5 +18,4 @@ public class BeanConfiguration {
     public LoggedUser loggedUser() {
         return new LoggedUser();
     }
-
 }

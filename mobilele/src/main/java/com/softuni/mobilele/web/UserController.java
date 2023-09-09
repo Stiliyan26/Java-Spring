@@ -1,8 +1,10 @@
 package com.softuni.mobilele.web;
 
+import com.softuni.mobilele.domain.dtos.banding.UserLoginFormDto;
 import com.softuni.mobilele.domain.dtos.banding.UserRegisterFormDto;
 import com.softuni.mobilele.domain.dtos.view.UserRoleViewModelDto;
 import com.softuni.mobilele.services.role.UserRoleService;
+import com.softuni.mobilele.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,14 +19,16 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController extends BaseController {
     private final UserRoleService roleService;
+    private final UserService userService;
 
     @Autowired
-    public UserController(UserRoleService roleService) {
+    public UserController(UserRoleService roleService, UserService userService) {
         this.roleService = roleService;
+        this.userService = userService;
     }
 
     @GetMapping("/register")
-    public ModelAndView getRegister(ModelAndView modelAndView){
+    public ModelAndView getRegister(ModelAndView modelAndView) {
         List<UserRoleViewModelDto> roleServiceAll = this.roleService.getAll();
 
         modelAndView.addObject("roles", roleServiceAll);
@@ -36,6 +40,20 @@ public class UserController extends BaseController {
     @PostMapping("/register")
     public ModelAndView postRegister(
             @ModelAttribute UserRegisterFormDto userRegisterInfo) {
-        return super.redirect("auth-login");
+        this.userService.registerUser(userRegisterInfo);
+
+        return super.redirect("login");
+    }
+
+    @GetMapping("/login")
+    public ModelAndView getLogin() {
+        return super.view("auth-login");
+    }
+
+    @PostMapping("/login")
+    public ModelAndView postLogin(UserLoginFormDto userLoginFormDto) {
+        return this.userService.loginUser(userLoginFormDto).IsValid()
+                ? super.redirect("/login")
+                : super.view("/");
     }
 }
