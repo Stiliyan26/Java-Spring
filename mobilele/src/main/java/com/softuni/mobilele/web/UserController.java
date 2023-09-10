@@ -42,7 +42,7 @@ public class UserController extends BaseController {
             @ModelAttribute UserRegisterFormDto userRegisterInfo) {
         this.userService.registerUser(userRegisterInfo);
 
-        return super.redirect("login");
+        return super.redirect("/login");
     }
 
     @GetMapping("/login")
@@ -53,7 +53,14 @@ public class UserController extends BaseController {
     @PostMapping("/login")
     public ModelAndView postLogin(UserLoginFormDto userLoginFormDto) {
         return this.userService.loginUser(userLoginFormDto).IsValid()
-                ? super.redirect("/login")
-                : super.view("/");
+                ? super.redirect("/")
+                : super.redirect("/login");
+    }
+
+    @PostMapping("/logout")
+    public ModelAndView postLogout() {
+        this.userService.logout();
+
+        return super.redirect("/");
     }
 }

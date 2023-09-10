@@ -8,4 +8,6 @@ public interface UserService {
     UserModel registerUser(UserRegisterFormDto userRegister);
 
     UserModel loginUser(UserLoginFormDto userLogin);
+
+    void logout();
 }

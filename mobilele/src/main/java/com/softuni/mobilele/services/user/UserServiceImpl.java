@@ -9,6 +9,7 @@ import com.softuni.mobilele.repositories.UserRepository;
 import com.softuni.mobilele.services.init.DataBaseInitService;
 import com.softuni.mobilele.services.role.UserRoleService;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,8 +22,11 @@ public class UserServiceImpl implements UserService, DataBaseInitService {
     private final ModelMapper modelMapper;
     private final LoggedUser loggedUser;
 
+    @Autowired
     public UserServiceImpl(UserRepository userRepository,
-                           UserRoleService userRoleService, ModelMapper modelMapper, LoggedUser loggedUser) {
+                           UserRoleService userRoleService,
+                           ModelMapper modelMapper,
+                           LoggedUser loggedUser) {
         this.userRepository = userRepository;
         this.userRoleService = userRoleService;
         this.modelMapper = modelMapper;
@@ -47,12 +51,11 @@ public class UserServiceImpl implements UserService, DataBaseInitService {
             ? this.userRoleService.findAllRoles()
             : List.of(this.userRoleService.findRoleByName("USER")));
 
-        final User userToSave = this.modelMapper
-                .map(userModel, User.class);
+        final User userToSave = this.modelMapper.map(userModel, User.class);
 
-        return this.modelMapper
-                .map(this.userRepository.saveAndFlush(userToSave),
-                UserModel.class);
+        User user = this.userRepository.saveAndFlush(userToSave);
+
+        return this.modelMapper.map(user, UserModel.class);
     }
 
     @Override
@@ -63,7 +66,7 @@ public class UserServiceImpl implements UserService, DataBaseInitService {
         UserModel userConfirmation = loggingCandidate.isPresent()
                     && loggingCandidate.get().getPassword().equals(userLogin.getPassword())
                 ? this.modelMapper
-                .map(loggingCandidate, UserModel.class)
+                    .map(loggingCandidate.get(), UserModel.class)
                 : new UserModel();
 
         if (userConfirmation.IsValid()) {
@@ -74,6 +77,11 @@ public class UserServiceImpl implements UserService, DataBaseInitService {
         }
 
         return userConfirmation;
+    }
+
+    @Override
+    public void logout() {
+        this.loggedUser.clearFields();
     }
 }
 

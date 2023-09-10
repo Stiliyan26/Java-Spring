@@ -62,12 +62,12 @@ public class UserRoleServiceImpl implements UserRoleService {
                 .map(r -> this.modelMapper.map(r, UserRoleDto.class))
                 .collect(Collectors.toList());
     }
-
     @Override
     public UserRoleDto findRoleByName(String name) {
-        return this.modelMapper.map(this.roleRepository.findByRole(name)
-                .orElseThrow(NoSuchElementException::new),
-                UserRoleDto.class);
+        UserRole existingUserRole = this.roleRepository.findByRole(Role.valueOf(name))
+                .orElseThrow(NoSuchElementException::new);
+
+        return this.modelMapper.map(existingUserRole, UserRoleDto.class);
     }
 }
 

@@ -14,6 +14,12 @@ public class LoggedUser {
     public LoggedUser() {
     }
 
+    public void clearFields(){
+        this.id = null;
+        this.username = null;
+        this.roleModel = null;
+    }
+
     public String getId() {
         return id;
     }
