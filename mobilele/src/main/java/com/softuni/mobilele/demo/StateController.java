@@ -2,10 +2,7 @@ package com.softuni.mobilele.demo;
 
 import com.softuni.mobilele.domain.dtos.banding.UserRegisterFormDto;
 import com.softuni.mobilele.web.BaseController;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,7 +21,7 @@ public class StateController extends BaseController {
                                          defaultValue = "") String username) {
         modelAndView.addObject(STATE_USERNAME_KEY, username);
 
-        return super.view("demo/login", modelAndView);
+        return super.view("/demo/login", modelAndView);
     }
 
     @PostMapping("/registerTestMe")
@@ -47,14 +44,17 @@ public class StateController extends BaseController {
 
     @PostMapping("/register")
     public ModelAndView postRegister(UserRegisterFormDto userRegisterForm,
-                                     HttpSession httpSession) {
+                                     HttpSession httpSession,
+                                     HttpServletRequest request) {
+        //HttpSession httpSession2 = request.getSession();
+
         httpSession.setAttribute(STATE_USERNAME_KEY, userRegisterForm.getUsername());
         return super.redirect("/demo/login");
     }
 
 
     @GetMapping("/login")
-    public ModelAndView getLogin2(ModelAndView modelAndView,
+    public ModelAndView getLogin(ModelAndView modelAndView,
                                   HttpSession httpSession) {
         String fetchedUsername = httpSession
                 .getAttribute(STATE_USERNAME_KEY).toString();
