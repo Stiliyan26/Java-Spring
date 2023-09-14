@@ -7,12 +7,19 @@ import java.util.Set;
 public class UserModel {
 
     private Long id;
+
     private String username;
+
     private String password;
+
     private String email;
+
     private Set<RoleModel> roles;
+
     private Level level;
+
     private String fullName;
+
     private Integer age;
 
     public UserModel() {

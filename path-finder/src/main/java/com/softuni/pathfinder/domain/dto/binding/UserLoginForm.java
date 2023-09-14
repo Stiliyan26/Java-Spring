@@ -1,4 +1,4 @@
-package com.softuni.pathfinder.domain.dto.banding;
+package com.softuni.pathfinder.domain.dto.binding;
 
 public class UserLoginForm {
     private String username;

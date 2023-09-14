@@ -1,42 +1,42 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
 <header th:fragment="navigation">
-  <nav class="main-nav">
-    <ul>
-      <th:block th:if="${username == ''}">
-        <li>
-          <a href="/">Home</a>
-        </li>
+    <nav class="main-nav">
+        <ul>
+            <th:block th:if="${@loggedUser.id == null}">
+                <li>
+                    <a th:href="@{/}">Home</a>
+                </li>
 
-        <li>
-          <a href="/auth/login">Login</a>
-        </li>
-        <li>
-          <a href="/auth/register">Register</a>
-        </li>
-        <li>
-          <a href="/about">About</a>
-        </li>
-      </th:block>
+                <li>
+                    <a th:href="@{/auth/login}">Login</a>
+                </li>
+                <li>
+                    <a th:href="@{/auth/register}">Register</a>
+                </li>
+                <li>
+                    <a href="/about">About</a>
+                </li>
+            </th:block>
 
-      <th:block th:unle ss="${username == ''}">
-        <li>
-          <a href="/">Add new route</a>
-        </li>
-        <li>
-          <a href="/">Profile</a>
-        </li>
+            <th:block th:unless="${@loggedUser.id == null}">
+                <li>
+                    <a href="/">Add new route</a>
+                </li>
 
-        <li>
-          <a href="/">Logout</a>
-        </li>
+                <li>
+                    <a href="/">Profile</a>
+                </li>
 
-        <li>
-          <a href="/">Home</a>
-        </li>
+                <li th:if="${@loggedUser.isAdmin()}">
+                    <a href="/">Admin</a>
+                </li>
 
-        <li>
-          <a href="/">Admin</a>
-        </li>
-      </th:block>
-    </ul>
-  </nav>
+                <li>
+                    <a th:href="@{/auth/logout}">Logout</a>
+                </li>
+            </th:block>
+        </ul>
+    </nav>
 </header>

@@ -44,12 +44,12 @@ public class UserServiceImpl implements UserService, DataBaseInitService {
 
     @Override
     public UserModel registerUser(UserRegisterFormDto userRegister) {
-        final UserModel userModel  = this.modelMapper
+        final UserModel userModel = this.modelMapper
                 .map(userRegister, UserModel.class);
 
         userModel.setRoles(this.userRepository.count() == 0
-            ? this.userRoleService.findAllRoles()
-            : List.of(this.userRoleService.findRoleByName("USER")));
+                ? this.userRoleService.findAllRoles()
+                : List.of(this.userRoleService.findRoleByName("USER")));
 
         final User userToSave = this.modelMapper.map(userModel, User.class);
 
@@ -59,24 +59,15 @@ public class UserServiceImpl implements UserService, DataBaseInitService {
     }
 
     @Override
-    public UserModel loginUser(UserLoginFormDto userLogin) {
-        Optional<User> loggingCandidate = this.userRepository
-                .findByUsername(userLogin.getUsername());
+    public void loginUser(UserLoginFormDto userLogin) {
+        UserModel loggingCandidate = this.modelMapper.map(
+                this.userRepository.findByUsername(userLogin.getUsername()).get(),
+                UserModel.class);
 
-        UserModel userConfirmation = loggingCandidate.isPresent()
-                    && loggingCandidate.get().getPassword().equals(userLogin.getPassword())
-                ? this.modelMapper
-                    .map(loggingCandidate.get(), UserModel.class)
-                : new UserModel();
-
-        if (userConfirmation.IsValid()) {
-            this.loggedUser
-                    .setId(userConfirmation.getId())
-                    .setUsername(userConfirmation.getUsername())
-                    .setRoleModel(userConfirmation.getRoles());
-        }
-
-        return userConfirmation;
+        this.loggedUser
+                .setId(loggingCandidate.getId())
+                .setUsername(loggingCandidate.getUsername())
+                .setRoleModel(loggingCandidate.getRoles());
     }
 
     @Override
@@ -84,4 +75,21 @@ public class UserServiceImpl implements UserService, DataBaseInitService {
         this.loggedUser.clearFields();
     }
 }
-
+    //
+    //public UserModel loginUser(UserLoginForm userLogin) {
+    //    Optional<User> loginCandidate = this.userRepository.findByUsername(userLogin.getUsername());
+    //
+    //    UserModel userConfirmation = loginCandidate.isPresent()
+    //            && loginCandidate.get().getPassword().equals(userLogin.getPassword())
+    //            ? this.modelMapper.map(loginCandidate, UserModel.class)
+    //            : new UserModel();
+    //
+    //    if (userConfirmation.isValid()) {
+    //        loggedUser
+    //                .setId(userConfirmation.getId())
+    //                .setUsername(userConfirmation.getUsername())
+    //                .setRoleModels(userConfirmation.getRoles());
+    //    }
+    //
+    //    return userConfirmation;
+    //}

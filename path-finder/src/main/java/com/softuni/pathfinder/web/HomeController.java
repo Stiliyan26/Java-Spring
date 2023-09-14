@@ -20,7 +20,7 @@ public class HomeController extends BaseController {
         this.routeService = routeService;
     }
 
-    @GetMapping
+    @GetMapping("/")
     public ModelAndView getHome(ModelAndView modelAndView,
                                 HttpSession httpSession) {
         String username = httpSession.getAttribute(USERNAME_SESSION_KEY) != null

@@ -1,6 +1,7 @@
 package com.softuni.pathfinder.domain.beans;
 
 import com.softuni.pathfinder.domain.dto.model.RoleModel;
+import com.softuni.pathfinder.domain.enums.RoleName;
 
 import java.util.Set;
 
@@ -46,5 +47,13 @@ public class LoggedUser {
         this.id = null;
         this.username = null;
         this.roleModels = null;
+    }
+
+    public Boolean isAdmin() {
+        return roleModels
+                .stream()
+                .anyMatch(roleModel -> roleModel
+                        .getRoleName()
+                        .equals(RoleName.ADMIN));
     }
 }

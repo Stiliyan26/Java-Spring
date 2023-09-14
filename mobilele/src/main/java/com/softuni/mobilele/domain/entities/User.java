@@ -1,9 +1,6 @@
 package com.softuni.mobilele.domain.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.List;
@@ -26,7 +23,7 @@ public class User extends BaseEntity{
     @Column
     private Boolean isActive;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.MERGE)
     private List<UserRole> roles;
 
     @Column

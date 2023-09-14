@@ -1,6 +1,7 @@
 package com.softuni.pathfinder.service;
 
 import com.softuni.pathfinder.domain.dto.model.RoleModel;
+import com.softuni.pathfinder.domain.entities.Role;
 import com.softuni.pathfinder.domain.enums.RoleName;
 import com.softuni.pathfinder.repository.RoleRepository;
 import org.modelmapper.ModelMapper;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 

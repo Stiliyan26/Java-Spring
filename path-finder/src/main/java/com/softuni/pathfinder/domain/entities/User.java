@@ -17,8 +17,7 @@ public class User extends BaseEntity {
     @Column
     private String email;
 
-    @ManyToMany(fetch = FetchType.EAGER,
-            cascade = {CascadeType.MERGE, CascadeType.DETACH})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     private Set<Role> roles;
 
     @Enumerated(EnumType.STRING)
@@ -94,5 +93,9 @@ public class User extends BaseEntity {
     public User setLevel(Level level) {
         this.level = level;
         return this;
+    }
+
+    public void addRole(Role roleToAdd) {
+        roles.add(roleToAdd);
     }
 }

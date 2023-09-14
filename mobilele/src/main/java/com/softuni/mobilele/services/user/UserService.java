@@ -7,7 +7,7 @@ import com.softuni.mobilele.domain.dtos.model.UserModel;
 public interface UserService {
     UserModel registerUser(UserRegisterFormDto userRegister);
 
-    UserModel loginUser(UserLoginFormDto userLogin);
+    void loginUser(UserLoginFormDto userLogin);
 
     void logout();
 }
