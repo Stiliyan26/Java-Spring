@@ -11,6 +11,7 @@ import softuni.battle_ships_exam.repository.CategoryRepository;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class CategoryService {
@@ -36,5 +37,12 @@ public class CategoryService {
 
             this.categoryRepository.saveAllAndFlush(categories);
         }
+    }
+
+    public CategoryModel findByName(CategoryType name) {
+        return this.modelMapper
+                .map(this.categoryRepository
+                        .findByName(name)
+                        .orElseThrow(NoSuchElementException::new), CategoryModel.class);
     }
 }

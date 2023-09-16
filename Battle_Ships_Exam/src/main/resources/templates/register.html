@@ -106,6 +106,7 @@
                                        th:value="*{confirmPassword}"
                                 >
                                 <small th:if="${#fields.hasErrors('confirmPassword')}"
+                                       th:errors="*{confirmPassword}"
                                        id="confirmPasswordHelpInline" class="bg-danger text-light rounded">
                                     Password length must be more than 3 characters long.
                                 </small>

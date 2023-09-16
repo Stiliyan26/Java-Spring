@@ -1,14 +1,14 @@
 package softuni.battle_ships_exam.domain.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Date;
-import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Setter
@@ -33,4 +33,11 @@ public class Ship extends BaseEntity {
 
     @ManyToOne
     private User user;
+
+    @Override
+    public String toString() {
+        String stats = "| %s | %s | %s |";
+
+        return String.format(stats, name, health, power);
+    }
 }

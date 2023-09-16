@@ -5,6 +5,7 @@ import jakarta.validation.ConstraintValidatorContext;
 import softuni.battle_ships_exam.domain.model.binding.UserRegisterModel;
 
 public class PasswordMatcher implements ConstraintValidator<PasswordMatch, UserRegisterModel> {
+
     @Override
     public void initialize(PasswordMatch constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
@@ -18,7 +19,7 @@ public class PasswordMatcher implements ConstraintValidator<PasswordMatch, UserR
         }
 
         context.buildConstraintViolationWithTemplate(context.getDefaultConstraintMessageTemplate())
-                .addPropertyNode(userRegisterModel.getConfirmPassword())
+                .addPropertyNode("confirmPassword")
                 .addConstraintViolation()
                 .disableDefaultConstraintViolation();
 

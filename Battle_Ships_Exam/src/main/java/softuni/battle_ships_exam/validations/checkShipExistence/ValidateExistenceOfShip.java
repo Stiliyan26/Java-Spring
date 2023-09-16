@@ -1,4 +1,4 @@
-package softuni.battle_ships_exam.validations.passwordMatcher;
+package softuni.battle_ships_exam.validations.checkShipExistence;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
@@ -9,10 +9,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-@Constraint(validatedBy = PasswordMatcher.class)
-public @interface PasswordMatch {
-    String message() default "Password miss match!";
+@Target(ElementType.FIELD)
+@Constraint(validatedBy = ShipExistenceValidator.class)
+public @interface ValidateExistenceOfShip {
+    String message() default "Ship name is taken!";
 
     Class<?>[] groups() default {};
 

@@ -1,4 +1,4 @@
-package softuni.battle_ships_exam.validations.passwordMatcher;
+package softuni.battle_ships_exam.validations.checkUserExistance;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
@@ -10,9 +10,9 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-@Constraint(validatedBy = PasswordMatcher.class)
-public @interface PasswordMatch {
-    String message() default "Password miss match!";
+@Constraint(validatedBy = UserLoginValidator.class)
+public @interface ValidateLoginForm {
+    String message() default "Invalid user!";
 
     Class<?>[] groups() default {};
 
