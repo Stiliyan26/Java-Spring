@@ -33,11 +33,4 @@ public class Ship extends BaseEntity {
 
     @ManyToOne
     private User user;
-
-    @Override
-    public String toString() {
-        String stats = "| %s | %s | %s |";
-
-        return String.format(stats, name, health, power);
-    }
 }

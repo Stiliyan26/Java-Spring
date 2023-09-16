@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import softuni.battle_ships_exam.domain.entities.Ship;
 import softuni.battle_ships_exam.domain.helpers.LoggedUser;
+import softuni.battle_ships_exam.domain.model.StatsShipModel;
 import softuni.battle_ships_exam.domain.model.UserWithShipsModel;
 import softuni.battle_ships_exam.domain.model.binding.BattleShipsModel;
 import softuni.battle_ships_exam.repository.ShipRepository;
@@ -73,7 +74,7 @@ public class HomeController {
     }
 
     @ModelAttribute(name = "allShips")
-    public List<Ship> ships() {
-        return this.shipRepository.findAll();
+    public List<StatsShipModel> ships() {
+        return this.shipService.sortShipsByStats();
     }
 }

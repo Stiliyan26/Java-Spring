@@ -7,12 +7,15 @@ import softuni.battle_ships_exam.domain.entities.Ship;
 import softuni.battle_ships_exam.domain.helpers.LoggedUser;
 import softuni.battle_ships_exam.domain.model.CategoryModel;
 import softuni.battle_ships_exam.domain.model.ShipModel;
+import softuni.battle_ships_exam.domain.model.StatsShipModel;
 import softuni.battle_ships_exam.domain.model.UserModel;
 import softuni.battle_ships_exam.domain.model.binding.BattleShipsModel;
 import softuni.battle_ships_exam.domain.model.binding.ShipAddModel;
 import softuni.battle_ships_exam.repository.ShipRepository;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ShipService {
@@ -81,5 +84,17 @@ public class ShipService {
         } else {
             this.shipRepository.saveAndFlush(notLoggedShips);
         }
+    }
+
+    public List<StatsShipModel> sortShipsByStats() {
+        return this.shipRepository.findAll()
+                .stream()
+                .sorted(Comparator
+                        .comparing(Ship::getName)
+                        .thenComparing(Ship::getHealth)
+                        .thenComparing(Ship::getPower))
+                .map(ship -> this.modelMapper
+                        .map(ship, StatsShipModel.class))
+                .collect(Collectors.toList());
     }
 }
