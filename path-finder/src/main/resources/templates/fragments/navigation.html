@@ -22,7 +22,9 @@
 
             <th:block th:unless="${@loggedUser.id == null}">
                 <li>
-                    <a href="/">Add new route</a>
+                    <a th:href="@{/routes/add}">
+                        Add new route
+                    </a>
                 </li>
 
                 <li>
