@@ -22,7 +22,8 @@ public class UserLoginValidator implements ConstraintValidator<ValidateLoginForm
 
     @Override
     public boolean isValid(UserLoginModel userLoginModel, ConstraintValidatorContext constraintValidatorContext) {
-        UserModel loggingCandidate = this.userService.findByUsername(userLoginModel.getUsername());
+        UserModel loggingCandidate = this.userService
+                .findByUsername(userLoginModel.getUsername());
 
         return  loggingCandidate.getId() != null
                 && loggingCandidate.getPassword().equals(userLoginModel.getPassword());

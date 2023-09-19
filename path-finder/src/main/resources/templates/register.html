@@ -11,19 +11,21 @@
         <div class="row g-3">
             <form th:action="@{/auth/register}"
             th:method="POST"
-            th:object="${userRegisterInfo}">
+            th:object="${userRegisterForm}">
                 <div>
                     <div class="col-auto">
                         <label for="inputUsername" class="col-form-label ">Username</label>
                     </div>
                     <div class="col-auto">
                         <input name="username"
+                               th:value="*{username}"
                                required minlength="5" maxlength="20"
                                type="text"
                                id="inputUsername"
                                class="form-control"
                                aria-describedby="usernameHelpInline">
                         <small id="usernameError"
+                               th:if="${#fields.hasErrors('username')}"
                                class="invalid-feedback bg-danger rounded">Username length must be more than 3 characters</small>
                             <small id="usernameUniqueError" th:if="${#fields.hasErrors('username')}"
                                    class=" bg-danger rounded">Username is already occupied</small>
@@ -36,12 +38,13 @@
                     </div>
                     <div class="col-auto">
                         <input name="fullName"
-                               required minlength="5" maxlength="20"
+                               th:value="*{fullName}"
                                type="text"
                                id="inputFullName"
                                class="form-control"
                                aria-describedby="fullNameHelpInline">
                         <small id="fullNameError"
+                               th:if="${#fields.hasErrors('fullName')}"
                                class="invalid-feedback  form-text bg-danger rounded">Full name length must be more than 3 characters</small>
                     </div>
                 </div>
@@ -52,12 +55,14 @@
                     </div>
                     <div class="col-auto">
                         <input name="email"
-								required
+                               th:value="*{email}"
+                               required
                                type="email"
                                id="inputEmail"
                                class="form-control"
                                aria-describedby="emailHelpInline">
                         <small id="emailError"
+                               th:if="${#fields.hasErrors('email')}"
                                class="invalid-feedback  form-text bg-danger rounded">Must be valid email</small>
                     </div>
                 </div>
@@ -67,12 +72,14 @@
                     </div>
                     <div class="col-auto">
                         <input name="age" required
+                               th:value="*{age}"
                                type="number"
                                id="inputAge"
                                class="form-control"
                                min="0" max="90"
                                aria-describedby="ageHelpInline">
                         <small id="ageError"
+                               th:if="${#fields.hasErrors('age')}"
                                class="invalid-feedback  form-text bg-danger rounded">Must be valid age</small>
                     </div>
                 </div>
@@ -82,12 +89,14 @@
                     </div>
                     <div class="col-auto">
                         <input name="password"
-                                required minlength="5" maxlength="20"
+                               th:value="*{password}"
+                               required minlength="5" maxlength="20"
                                type="password"
                                id="inputPassword"
                                class="form-control"
                                aria-describedby="passwordHelpInline">
                         <small id="passwordError"
+                               th:if="${#fields.hasErrors('password')}"
                                class="invalid-feedback  form-text bg-danger rounded">
                             Password length must be between 5 and 20 characters and passwords should match.
                         </small>
@@ -100,12 +109,14 @@
                     </div>
                     <div class="col-auto">
                         <input name="confirmPassword"
-                                required minlength="5" maxlength="20"
+                               th:value="*{confirmPassword}"
+                               required minlength="5" maxlength="20"
                                type="password"
                                id="inputConfirmPassword"
                                class="form-control"
                                aria-describedby="confirmPasswordHelpInline">
                         <small id="confirmPasswordError"
+                               th:if="${#fields.hasErrors('confirmPassword')}"
                                class="invalid-feedback  form-text bg-danger rounded">
                             Password length must be between 5 and 20 characters and passwords should match.
                         </small>

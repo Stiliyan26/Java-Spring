@@ -1,15 +1,17 @@
 package com.softuni.pathfinder.domain.dto.binding;
 
+import com.softuni.pathfinder.validations.passwordValidations.PasswordMatch;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+@PasswordMatch
 public class UserRegisterForm {
     @NotNull
-    @Size(min = 5)
+    @Size(min = 5, max = 20)
     private String username;
 
-    @Size(min = 5)
+    @Size(min = 5, max = 20)
     private String fullName;
 
     @Email

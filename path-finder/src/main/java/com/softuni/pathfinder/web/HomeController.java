@@ -1,6 +1,6 @@
 package com.softuni.pathfinder.web;
 
-import com.softuni.pathfinder.domain.dto.view.MostCommentedRouteViewDto;
+import com.softuni.pathfinder.domain.dto.view.RoutePartialViewModel;
 import com.softuni.pathfinder.service.RouteService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +27,17 @@ public class HomeController extends BaseController {
             ? httpSession.getAttribute(USERNAME_SESSION_KEY).toString()
             : "";
 
-        final MostCommentedRouteViewDto mostCommented =
+        final RoutePartialViewModel mostCommented =
                 this.routeService.getMostCommented();
 
         modelAndView.addObject("mostCommented", mostCommented);
         modelAndView.addObject(USERNAME_SESSION_KEY, username);
 
         return super.view("index", modelAndView);
+    }
+
+    @GetMapping("about")
+    public ModelAndView getAbout() {
+        return super.view("about");
     }
 }

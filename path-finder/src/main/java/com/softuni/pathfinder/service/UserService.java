@@ -5,6 +5,7 @@ import com.softuni.pathfinder.domain.dto.binding.RoleChangeForm;
 import com.softuni.pathfinder.domain.dto.binding.UserLoginForm;
 import com.softuni.pathfinder.domain.dto.binding.UserRegisterForm;
 import com.softuni.pathfinder.domain.dto.model.UserModel;
+import com.softuni.pathfinder.domain.dto.view.UserProfileModel;
 import com.softuni.pathfinder.domain.entities.Role;
 import com.softuni.pathfinder.domain.entities.User;
 import com.softuni.pathfinder.domain.enums.Level;
@@ -95,5 +96,19 @@ public class UserService {
                 .stream()
                 .map(Role::getRole)
                 .collect(Collectors.toSet());
+    }
+
+    public UserModel findByUsername(String username) {
+        return this.modelMapper
+                .map(this.userRepository
+                        .findByUsername(username)
+                        .orElse(new User()), UserModel.class);
+    }
+
+    public UserProfileModel getLoggedUserProfile() {
+        return this.modelMapper
+                .map(this.userRepository.findById(loggedUser.getId())
+                        .orElseThrow(NoSuchElementException::new),
+                        UserProfileModel.class);
     }
 }

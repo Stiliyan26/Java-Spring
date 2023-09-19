@@ -1,5 +1,8 @@
 package com.softuni.pathfinder.domain.dto.binding;
 
+import com.softuni.pathfinder.validations.checkUserExistance.ValidateLoginForm;
+
+@ValidateLoginForm
 public class UserLoginForm {
     private String username;
 
