@@ -1,16 +1,15 @@
 package com.softuni.pathfinder.web;
 
-import com.softuni.pathfinder.domain.dto.binding.CategoryAddForm;
+import com.softuni.pathfinder.domain.dto.binding.RouteAddForm;
 import com.softuni.pathfinder.service.RouteService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/routes")
@@ -35,19 +34,30 @@ public class RouteController extends BaseController{
     }
 
     @PostMapping("/add")
-    public ModelAndView postAdd(@Valid CategoryAddForm categoryAddForm,
+    public ModelAndView postAdd(@Valid RouteAddForm routeAddForm,
                                 BindingResult bindingResult,
-                                ModelAndView modelAndView) {
+                                ModelAndView modelAndView) throws IOException {
+
         if (bindingResult.hasErrors()) {
             return super.view("add-route", modelAndView);
         }
 
-        return super.view("add-route", modelAndView);
+
+        this.routeService.addNewRoute(routeAddForm);
+        return super.view("redirect:/routes", modelAndView);
+    }
+
+    @GetMapping("/{id}")
+    public ModelAndView getById(@PathVariable Long id,
+                                ModelAndView modelAndView) {
+        return super.view("route-details",
+                modelAndView.addObject("route", this.routeService
+                        .findById(id)));
     }
 
     //ModelAttributes
     @ModelAttribute(name = "routeAddForm")
-    public CategoryAddForm initCategoryAddForm() {
-        return new CategoryAddForm();
+    public RouteAddForm initCategoryAddForm() {
+        return new RouteAddForm();
     }
 }

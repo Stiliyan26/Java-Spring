@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-public class CategoryAddForm {
+public class RouteAddForm {
     @NotNull
     private MultipartFile gpxCoordinates;
 
@@ -26,14 +26,14 @@ public class CategoryAddForm {
     @NotNull
     private List<String> categories;
 
-    public CategoryAddForm() {
+    public RouteAddForm() {
     }
 
     public MultipartFile getGpxCoordinates() {
         return gpxCoordinates;
     }
 
-    public CategoryAddForm setGpxCoordinates(MultipartFile gpxCoordinates) {
+    public RouteAddForm setGpxCoordinates(MultipartFile gpxCoordinates) {
         this.gpxCoordinates = gpxCoordinates;
         return this;
     }
@@ -42,7 +42,7 @@ public class CategoryAddForm {
         return level;
     }
 
-    public CategoryAddForm setLevel(Level level) {
+    public RouteAddForm setLevel(Level level) {
         this.level = level;
         return this;
     }
@@ -51,7 +51,7 @@ public class CategoryAddForm {
         return name;
     }
 
-    public CategoryAddForm setName(String name) {
+    public RouteAddForm setName(String name) {
         this.name = name;
         return this;
     }
@@ -60,7 +60,7 @@ public class CategoryAddForm {
         return video;
     }
 
-    public CategoryAddForm setVideo(String video) {
+    public RouteAddForm setVideo(String video) {
         this.video = video;
         return this;
     }
@@ -69,7 +69,7 @@ public class CategoryAddForm {
         return description;
     }
 
-    public CategoryAddForm setDescription(String description) {
+    public RouteAddForm setDescription(String description) {
         this.description = description;
         return this;
     }
@@ -78,7 +78,7 @@ public class CategoryAddForm {
         return categories;
     }
 
-    public CategoryAddForm setCategories(List<String> categories) {
+    public RouteAddForm setCategories(List<String> categories) {
         this.categories = categories;
         return this;
     }

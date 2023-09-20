@@ -1,8 +1,7 @@
 package com.softuni.pathfinder.domain.dto.view;
 
+import com.softuni.pathfinder.domain.entities.Picture;
 import com.softuni.pathfinder.domain.entities.Route;
-
-import java.util.NoSuchElementException;
 
 public class RoutePartialViewModel {
     private Long id;
@@ -63,7 +62,8 @@ public class RoutePartialViewModel {
         String picture = route.getPictures()
                 .stream()
                 .findFirst()
-                .orElseThrow(NoSuchElementException::new)
+                .orElse(new Picture()
+                        .setUrl("http://res.cloudinary.com/ch-cloud/image/upload/v1630581072/d47iy8kxv6qni8euhojk.jpg"))
                 .getUrl();
 
         return new RoutePartialViewModel(
