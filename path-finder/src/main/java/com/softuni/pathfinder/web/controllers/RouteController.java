@@ -1,4 +1,4 @@
-package com.softuni.pathfinder.web;
+package com.softuni.pathfinder.web.controllers;
 
 import com.softuni.pathfinder.domain.dto.binding.RouteAddForm;
 import com.softuni.pathfinder.service.RouteService;
@@ -53,6 +53,16 @@ public class RouteController extends BaseController{
         return super.view("route-details",
                 modelAndView.addObject("route", this.routeService
                         .findById(id)));
+    }
+
+    @GetMapping("/byType/{type}")
+    public ModelAndView getAllByType(@PathVariable String type,
+                                     ModelAndView modelAndView) {
+        modelAndView
+                .addObject("routes", this.routeService
+                        .findAllByCategoryName(type));
+
+        return super.view("route-by-type", modelAndView);
     }
 
     //ModelAttributes

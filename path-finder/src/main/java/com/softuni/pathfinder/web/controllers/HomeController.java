@@ -1,4 +1,4 @@
-package com.softuni.pathfinder.web;
+package com.softuni.pathfinder.web.controllers;
 
 import com.softuni.pathfinder.domain.dto.view.RoutePartialViewModel;
 import com.softuni.pathfinder.service.RouteService;

@@ -90,7 +90,7 @@ public class RouteService {
 
     public List<RoutePartialViewModel> findAllByCategoryName(String categoryName) {
         Category category = this.categoryService
-                .findByName(CategoryName.valueOf(categoryName));
+                .findByName(CategoryName.valueOf(categoryName.toUpperCase()));
 
         return this.routeRepository
                 .findAllByCategoriesContains(category)
